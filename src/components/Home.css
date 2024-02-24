@@ -1,0 +1,30 @@
+.movie-container {
+    display: flex!important;
+    flex-wrap: wrap;
+    justify-content: center!important;
+  }
+  
+  .movie-card {
+    width: 18rem;
+    margin: 1rem;
+    background-color: #333!important;
+  }
+  
+  .movie-card img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .movie-card .card-body {
+    padding: 1rem;
+  }
+  
+  .movie-card .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .movie-card .card-text {
+    margin-top: 0.5rem;
+  }
+  
