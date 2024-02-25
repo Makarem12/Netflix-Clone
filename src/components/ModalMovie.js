@@ -1,35 +1,52 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { addMovieToDatabase } from './api'; 
 
-const ModalMovie = ({ movie, addToFavorites }) => {
+
+function ModalMovie({ movie, show, handleClose }) {
   const [comment, setComment] = useState('');
 
-  const handleAddToFavorites = () => {
-    addToFavorites(movie, comment);
-    
+  const handleAddToFavorites = async () => {
+    try {
+      
+      await addMovieToDatabase({ ...movie, comment });
+      handleClose(); 
+    } catch (error) {
+      console.error('Error adding movie to favorites:', error);
+      
+    }
   };
 
   return (
-    <Modal show={true} onHide={() => {}}>
+    <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>{movie.name}</Modal.Title>
+        <Modal.Title>{movie.title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <img src={movie.img} alt={movie.name} />
-        <textarea
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          placeholder="Add a comment..."
-        />
+        <img src={`https://image.tmdb.org/t/p/w500/${movie.path}`} alt="Movie image" />
+        <p>{movie.overview}</p>
+        <Form.Group controlId="comment">
+          <Form.Label>Add a comment:</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+        </Form.Group>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleAddToFavorites}>
+        <Button variant="secondary" onClick={handleClose}>
+          Close
+        </Button>
+        <Button variant="primary" onClick={handleAddToFavorites}>
           Add to Favorites
         </Button>
       </Modal.Footer>
     </Modal>
   );
-};
+}
 
 export default ModalMovie;
