@@ -13,7 +13,7 @@ function ModalMovie(props) {
 
   
   
-  const addToFav = async (id, title, imagePath, comment) => {
+  const addToFav = async (id, title, path, date, overview, comment) => {
     
     try {
       const serverURL = 'http://localhost:3001/addMovie';
@@ -25,15 +25,17 @@ function ModalMovie(props) {
         body: JSON.stringify({
           id: id,
           title: title,
-          imagePath: imagePath,
-          comment: comment,
+          date:date,
+          path: path,
+          overview:overview,
+          comment:comment
         }),
       });
       if (response.ok) {
-        // Handle successful database insertion
+        
         console.log('Movie added to favorites successfully!');
       } else {
-        // Handle errors
+        
         console.error('Failed to add movie to favorites');
       }
     } catch (error) {
@@ -68,7 +70,7 @@ return (
         <Button variant="secondary" onClick={props.handleClose}>
           Close
         </Button>
-        <Button variant="primary" onClick={() => addToFav(props.clickedItem.id, props.clickedItem.title, `https://image.tmdb.org/t/p/w500/${props.clickedItem.path}`, comment)}>
+        <Button variant="primary" onClick={() => addToFav(props.clickedItem.id, props.clickedItem.title, `https://image.tmdb.org/t/p/w500/${props.clickedItem.path}`, props.clickedItem.date, props.clickedItem.overview, comment)}>
           Submit Comment
         </Button>
       </Modal.Footer>
