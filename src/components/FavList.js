@@ -21,14 +21,14 @@ function FavList(){
 
     const deleteMovie = async (id) => {
         console.log("Deleting movie with id:", id);
-        const serverURL = `http://localhost:3001/DELETE/${id}`;
+        const serverURL = `https://movies-server-f3zt.onrender.com/DELETE/${id}`;
         const res = await fetch(serverURL, {method: "DELETE"});
         setmoviesArray(moviesArray.filter(movie => movie.id !== id));
 
     }
     const updateMovie = async (id, newComment) => {
         try {
-            await fetch(`http://localhost:3001/UPDATE/${id}`, {
+            await fetch(`https://movies-server-f3zt.onrender.com/UPDATE/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
