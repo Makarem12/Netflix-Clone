@@ -8,7 +8,7 @@ function Home() {
    
 
     const sendReq = async () => {
-        const serverURL = `http://localhost:3001/trending`;
+        const serverURL = `https://movies-server-f3zt.onrender.com/trending`;
         const res = await fetch(serverURL);
         const jsonRes = await res.json();
         console.log(jsonRes);
